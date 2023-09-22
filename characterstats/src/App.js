@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import './App.css';
 
 function App() {
@@ -11,6 +11,8 @@ function App() {
   const [wisScore, setWisScore] = useState(8);
   const [chaScore, setChaScore] = useState(8);
   const [cusScore, setCusScore] = useState(8);
+
+ 
 
   return (
     <div >
