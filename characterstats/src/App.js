@@ -13,6 +13,12 @@ function App() {
   const [cusScore, setCusScore] = useState(8);
 
   const [racialStr, setRacialStr] = useState(0);
+  const [racialDex, setRacialDex] = useState(0);
+  const [racialCon, setRacialCon] = useState(0);
+  const [racialInt, setRacialInt] = useState(0);
+  const [racialWis, setRacialWis] = useState(0);
+  const [racialCha, setRacialCha] = useState(0);
+  const [racialCus, setRacialCus] = useState(0);
 
 
   const [totalStr, setTotalStr] = useState(8);
@@ -50,21 +56,75 @@ function updateScores(plusOrMinus, attributeType) {
         setTotalDex(totalDex - 1)
       }
       break;
+
+      case 'constitution':
+        if(plusOrMinus === 'plus') {
+          setConScore(conScore + 1);
+          setTotalCon(totalCon + 1)
+        } else {
+          setConScore(conScore - 1);
+          setTotalCon(totalCon - 1)
+        }
+        break;
+
+        case 'intelligence':
+          if(plusOrMinus === 'plus') {
+            setIntScore(intScore + 1);
+            setTotalInt(totalInt + 1)
+          } else {
+            setIntScore(intScore - 1);
+            setTotalInt(totalInt - 1)
+          }
+          break;
+
+          case 'wisdom':
+            if(plusOrMinus === 'plus') {
+              setWisScore(wisScore + 1);
+              setTotalWis(totalWis + 1)
+            } else {
+              setWisScore(wisScore - 1);
+              setTotalWis(totalWis - 1)
+            }
+            break;
+
+            case 'charisma':
+              if(plusOrMinus === 'plus') {
+                setChaScore(chaScore + 1);
+                setTotalCha(totalCha + 1)
+              } else {
+                setChaScore(chaScore - 1);
+                setTotalCha(totalCha - 1)
+              }
+              break;
+
+              case 'custom':
+                if(plusOrMinus === 'plus') {
+                  setCusScore(cusScore + 1);
+                  setTotalCus(totalCus + 1)
+                } else {
+                  setCusScore(cusScore - 1);
+                  setTotalCus(totalCus - 1)
+                }
+                break;
       default:
         return;
   }
 }
 
 
+function racialStat() {
+
+};
+
   return (
     <div >
       <div>
         <label>
           <h1>Choose your Race</h1>
-          <select>
+          <select onChange={racialStat}>
             <option>Select</option>
             <option onSelect={elfRacial}>Elf</option>
-            <option onSelect={() => humanRacial((racialStr) => racialStr + 1)}>Human</option>
+            <option onSelect={humanRacial}>Human</option>
             <option onSelect={halfOrcRacial}>Half-Orc</option>
             <option onSelect={halfElfRacial}>Half-Elf</option>
             <option onSelect={gnomeRacial}>Gnome</option>
@@ -90,39 +150,39 @@ function updateScores(plusOrMinus, attributeType) {
     </div>
     <hr></hr>
     <div>
-      <button onClick={() => setAbilityScore((prevDexScore) => prevDexScore - 1)}>+</button>
-      <button onClick={() => setAbilityScore((prevDexScore) => prevDexScore + 1)}>-</button>
-      <h4>Dexterity {dexScore}</h4>
+    <button onClick={() => updateScores('plus', 'dexterity')}>+</button>
+      <button onClick={() => updateScores('minus', 'dexterity')}>-</button>
+      <h4>Dexterity {dexScore} + {racialDex} = {totalDex}</h4>
     </div>
     <hr></hr>
     <div>
-      <button onClick={() => setAbilityScore((prevConScore) => prevConScore - 1)}>+</button>
-      <button onClick={() => setAbilityScore((prevConScore) => prevConScore + 1)}>-</button>
-      <h4>Constitution {conScore}</h4>
+    <button onClick={() => updateScores('plus', 'constitution')}>+</button>
+      <button onClick={() => updateScores('minus', 'constitution')}>-</button>
+      <h4>Constitution {conScore} + {racialCon} = {totalCon}</h4>
     </div>
     <hr></hr>
     <div>
-      <button onClick={() => setAbilityScore((prevIntScore) => prevIntScore - 1)}>+</button>
-      <button onClick={() => setAbilityScore((prevIntScore) => prevIntScore + 1)}>-</button>
-      <h4>Intelligence {intScore}</h4>
+    <button onClick={() => updateScores('plus', 'intelligence')}>+</button>
+      <button onClick={() => updateScores('minus', 'intelligence')}>-</button>
+      <h4>Intelligence {intScore} + {racialInt} = {totalInt}</h4>
     </div>
     <hr></hr>
     <div>
-      <button onClick={() => setAbilityScore((prevWisScore) => prevWisScore - 1)}>+</button>
-      <button onClick={() => setAbilityScore((prevWisScore) => prevWisScore + 1)}>-</button>
-      <h4>Wisdom {wisScore}</h4>
+    <button onClick={() => updateScores('plus', 'wisdom')}>+</button>
+      <button onClick={() => updateScores('minus', 'wisdom')}>-</button>
+      <h4>Wisdom {wisScore} + {racialWis} = {totalWis}</h4>
     </div>
     <hr></hr>
     <div>
-      <button onClick={() => setAbilityScore((prevChaScore) => prevChaScore - 1)}>+</button>
-      <button onClick={() => setAbilityScore((prevChaScore) => prevChaScore + 1)}>-</button>
-      <h4>Charisma {chaScore}</h4>
+    <button onClick={() => updateScores('plus', 'charisma')}>+</button>
+      <button onClick={() => updateScores('minus', 'charisma')}>-</button>
+      <h4>Charisma {chaScore} + {racialCha} = {totalCha}</h4>
     </div>
     <hr></hr>
     <div>
-    <button onClick={() => setAbilityScore((prevCusScore) => prevCusScore - 1)}>+</button>
-      <button onClick={() => setAbilityScore((prevCusScore) => prevCusScore + 1)}>-</button>
-      <h4>Custom {cusScore}</h4>
+    <button onClick={() => updateScores('plus', 'custom')}>+</button>
+      <button onClick={() => updateScores('minus', 'custom')}>-</button>
+      <h4>Custom {cusScore} + {racialCus} = {totalCus}</h4>
     </div>
 
     </div>
