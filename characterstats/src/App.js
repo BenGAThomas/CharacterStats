@@ -111,17 +111,51 @@ function updateScores(plusOrMinus, attributeType) {
   }
 }
 
+//what if we use the racechoice as the function and then call each function racial in the racechoice function?
+function raceChoice(elfRacial, human, halfOrc,halfElf, gnome, tiefling, dwarf, halfling, dragonborn,) {
+  if (raceChoice === elfRacial)
+    {
+      racialDex = 2;
+    } else if (raceChoice === human)
+    {
+      racialStr = 1;
+      racialDex = 1;
+      racialCon = 1;
+      racialInt = 1;
+      racialWis = 1;
+      racialCha = 1;
+      racialCus = 1;
+    } else if (raceChoice === halfOrc) {
+      racialStr = 2;
+      racialCon = 1;
+    } else if (raceChoice === halfElf) {
+      racialCha = 1;
+      racialDex = 1;
+      racialInt = 1;
+    } else if (raceChoice === gnome) {
+      racialInt = 2;
+    } else if (raceChoice === tiefling) {
+      racialInt = 1;
+      racialCha = 2;
+    } else if (raceChoice === dwarf) {
+      racialCon = 2;
+    } else if (raceChoice === halfling) {
+      racialDex = 2;
+    } else if (raceChoice === dragonborn) {
+      racialStr = 2;
+      racialCha = 1;
 
-function racialStat() {
+      return;
+    }
+  }
 
-};
 
   return (
     <div >
       <div>
         <label>
           <h1>Choose your Race</h1>
-          <select onChange={racialStat}>
+          <select onChange={raceChoice}>
             <option>Select</option>
             <option onSelect={elfRacial}>Elf</option>
             <option onSelect={humanRacial}>Human</option>
