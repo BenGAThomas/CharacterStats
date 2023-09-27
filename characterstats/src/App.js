@@ -54,7 +54,7 @@ function updateScores(plusOrMinus, attributeType) {
     case 'dexterity':
       if(plusOrMinus === 'plus') {
         setDexScore(dexScore + 1);
-        setTotalDex(totalDex + 1)
+        setTotalDex(totalDex + racialDex + 1)
       } else {
         setDexScore(dexScore - 1);
         setTotalDex(totalDex - 1)
@@ -64,7 +64,7 @@ function updateScores(plusOrMinus, attributeType) {
       case 'constitution':
         if(plusOrMinus === 'plus') {
           setConScore(conScore + 1);
-          setTotalCon(totalCon + 1)
+          setTotalCon(totalCon + racialCon + 1)
         } else {
           setConScore(conScore - 1);
           setTotalCon(totalCon - 1)
@@ -74,7 +74,7 @@ function updateScores(plusOrMinus, attributeType) {
         case 'intelligence':
           if(plusOrMinus === 'plus') {
             setIntScore(intScore + 1);
-            setTotalInt(totalInt + 1)
+            setTotalInt(totalInt + racialInt + 1)
           } else {
             setIntScore(intScore - 1);
             setTotalInt(totalInt - 1)
@@ -84,7 +84,7 @@ function updateScores(plusOrMinus, attributeType) {
           case 'wisdom':
             if(plusOrMinus === 'plus') {
               setWisScore(wisScore + 1);
-              setTotalWis(totalWis + 1)
+              setTotalWis(totalWis + racialWis + 1)
             } else {
               setWisScore(wisScore - 1);
               setTotalWis(totalWis - 1)
@@ -94,7 +94,7 @@ function updateScores(plusOrMinus, attributeType) {
             case 'charisma':
               if(plusOrMinus === 'plus') {
                 setChaScore(chaScore + 1);
-                setTotalCha(totalCha + 1)
+                setTotalCha(totalCha + racialCha + 1)
               } else {
                 setChaScore(chaScore - 1);
                 setTotalCha(totalCha - 1)
@@ -104,7 +104,7 @@ function updateScores(plusOrMinus, attributeType) {
               case 'custom':
                 if(plusOrMinus === 'plus') {
                   setCusScore(cusScore + 1);
-                  setTotalCus(totalCus + 1)
+                  setTotalCus(totalCus + racialCus + 1)
                 } else {
                   setCusScore(cusScore - 1);
                   setTotalCus(totalCus - 1)
@@ -137,7 +137,175 @@ function updateScores(plusOrMinus, attributeType) {
 
       setRacialCus(1);
       setTotalCus(racialCus + cusScore);
-    }
+    } else if (raceSelected === 'Elf') {
+      setRacialStr(0);
+      setTotalStr(racialStr + strScore);
+
+      setRacialDex(2);
+      setTotalDex(racialDex + dexScore);
+
+      setRacialCon(0);
+      setTotalCon(racialCon + conScore);
+
+      setRacialInt(0);
+      setTotalInt(racialInt + intScore);
+
+      setRacialWis(0);
+      setTotalWis(racialWis + wisScore);
+
+      setRacialCha(0);
+      setTotalDex(racialCha + chaScore);
+
+      setRacialCus(0);
+      setTotalCus(racialCus + cusScore);
+    } else if (raceSelected === 'Dwarf') {
+      setRacialStr(0);
+      setTotalStr(racialStr + strScore);
+
+      setRacialDex(0);
+      setTotalDex(racialDex + dexScore);
+
+      setRacialCon(2);
+      setTotalCon(racialCon + conScore);
+
+      setRacialInt(0);
+      setTotalInt(racialInt + intScore);
+
+      setRacialWis(0);
+      setTotalWis(racialWis + wisScore);
+
+      setRacialCha(0);
+      setTotalDex(racialCha + chaScore);
+
+      setRacialCus(0);
+      setTotalCus(racialCus + cusScore);
+    } else if (raceSelected === 'Dragonborn') {
+      setRacialStr(2);
+      setTotalStr(racialStr + strScore);
+
+      setRacialDex(0);
+      setTotalDex(racialDex + dexScore);
+
+      setRacialCon(0);
+      setTotalCon(racialCon + conScore);
+
+      setRacialInt(0);
+      setTotalInt(racialInt + intScore);
+
+      setRacialWis(0);
+      setTotalWis(racialWis + wisScore);
+
+      setRacialCha(1);
+      setTotalDex(racialCha + chaScore);
+
+      setRacialCus(0);
+      setTotalCus(racialCus + cusScore);
+    } else if (raceSelected === 'Gnome') {
+      setRacialStr(0);
+      setTotalStr(racialStr + strScore);
+
+      setRacialDex(0);
+      setTotalDex(racialDex + dexScore);
+
+      setRacialCon(0);
+      setTotalCon(racialCon + conScore);
+
+      setRacialInt(2);
+      setTotalInt(racialInt + intScore);
+
+      setRacialWis(0);
+      setTotalWis(racialWis + wisScore);
+
+      setRacialCha(0);
+      setTotalDex(racialCha + chaScore);
+
+      setRacialCus(0);
+      setTotalCus(racialCus + cusScore);
+    } else if (raceSelected === 'Half-Elf') {
+      setRacialStr(0);
+      setTotalStr(racialStr + strScore);
+
+      setRacialDex(1);
+      setTotalDex(racialDex + dexScore);
+
+      setRacialCon(0);
+      setTotalCon(racialCon + conScore);
+
+      setRacialInt(1);
+      setTotalInt(racialInt + intScore);
+
+      setRacialWis(0);
+      setTotalWis(racialWis + wisScore);
+
+      setRacialCha(2);
+      setTotalDex(racialCha + chaScore);
+
+      setRacialCus(0);
+      setTotalCus(racialCus + cusScore);
+    } else if (raceSelected === 'Halfling') {
+      setRacialStr(0);
+      setTotalStr(racialStr + strScore);
+
+      setRacialDex(2);
+      setTotalDex(racialDex + dexScore);
+
+      setRacialCon(0);
+      setTotalCon(racialCon + conScore);
+
+      setRacialInt(0);
+      setTotalInt(racialInt + intScore);
+
+      setRacialWis(0);
+      setTotalWis(racialWis + wisScore);
+
+      setRacialCha(0);
+      setTotalDex(racialCha + chaScore);
+
+      setRacialCus(0);
+      setTotalCus(racialCus + cusScore);
+    } else if (raceSelected === 'Half-Orc') {
+      setRacialStr(2);
+      setTotalStr(racialStr + strScore);
+
+      setRacialDex(0);
+      setTotalDex(racialDex + dexScore);
+
+      setRacialCon(1);
+      setTotalCon(racialCon + conScore);
+
+      setRacialInt(0);
+      setTotalInt(racialInt + intScore);
+
+      setRacialWis(0);
+      setTotalWis(racialWis + wisScore);
+
+      setRacialCha(0);
+      setTotalDex(racialCha + chaScore);
+
+      setRacialCus(0);
+      setTotalCus(racialCus + cusScore);
+    } else if (raceSelected === 'Tiefling') {
+      setRacialStr(0);
+      setTotalStr(racialStr + strScore);
+
+      setRacialDex(0);
+      setTotalDex(racialDex + dexScore);
+
+      setRacialCon(0);
+      setTotalCon(racialCon + conScore);
+
+      setRacialInt(1);
+      setTotalInt(racialInt + intScore);
+
+      setRacialWis(0);
+      setTotalWis(racialWis + wisScore);
+
+      setRacialCha(2);
+      setTotalDex(racialCha + chaScore);
+
+      setRacialCus(0);
+      setTotalCus(racialCus + cusScore);
+    };
   }, [raceSelected])
 
 
@@ -219,13 +387,13 @@ function cusMod() {
             <option>Select</option>
             <option value="Elf">Elf</option>
             <option value="Human">Human</option>
-            {/* <option onSelect={halfOrcRacial}>Half-Orc</option>
-            <option onSelect={halfElfRacial}>Half-Elf</option>
-            <option onSelect={gnomeRacial}>Gnome</option>
-            <option onSelect={tieflingRacial}>Tiefling</option>
-            <option onSelect={dwarfRacial}>Dwarf</option>
-            <option onSelect={halflingRacial}>Halfing</option>
-            <option onSelect={dragonbornRacial}>Dragonborn</option> */}
+            <option value="Gnome">Gnome</option>
+            <option value="Half-Elf">Half-Elf</option>
+            <option value="Half-Orc">Half-Orc</option>
+            <option value="Tiefling">Tiefling</option>
+            <option value="Dragonborn">Dragonborn</option>
+            <option value="Dwarf">Dwarf</option>
+            <option value="Halfling">Halfling</option>
           </select>
         </label>
       </div>
