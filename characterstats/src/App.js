@@ -32,26 +32,63 @@ function App() {
   const [totalCus, setTotalCus] = useState(8);
 
 
-//this function is used for the math to update the scores of each ability  
+//Tells you how much it goes up from each score
+function costScore(abilityScore) {
+  switch(abilityScore) {
+    case 8:
+      return 1;
+
+    case 9:
+    return 1;
+
+    case 10:
+      return 1;
+
+    case 11:
+    return 1;
+        
+    case 12:
+    return 1;
+    
+    
+    case 13:
+    return 2;
+
+
+    case 14:
+    return 2;
+        
+        
+    case 15:
+    return 2;
+
+      default: return 0; 
+    
+  
+  } 
+}
+
+//this function is used for the math to update the scores of each ability 
 function updateScores(plusOrMinus, attributeType) {
-  if (plusOrMinus === 'plus') {
-    setAbilityScore(abilityScore - 1);
-  } else {
-    setAbilityScore(abilityScore + 1);
-  }
+  // if (plusOrMinus === 'plus') {
+  //   setAbilityScore(abilityScore - 1);
+  // } else {
+  //   setAbilityScore(abilityScore + 1);
+  // }
 
   switch(attributeType) {
     case 'strength':
       if (plusOrMinus === 'plus') {
+      costScore(strScore)
+      setAbilityScore(abilityScore - costScore(strScore)); 
         setStrScore(strScore + 1);
-        setTotalStr(totalStr + racialStr + 1)
       } else {
         setStrScore(strScore - 1);
-        setTotalStr(totalStr - 1)
       }
       break;
 
     case 'dexterity':
+      costScore()
       if(plusOrMinus === 'plus') {
         setDexScore(dexScore + 1);
         setTotalDex(totalDex + racialDex + 1)
@@ -62,6 +99,7 @@ function updateScores(plusOrMinus, attributeType) {
       break;
 
       case 'constitution':
+        costScore()
         if(plusOrMinus === 'plus') {
           setConScore(conScore + 1);
           setTotalCon(totalCon + racialCon + 1)
@@ -72,6 +110,7 @@ function updateScores(plusOrMinus, attributeType) {
         break;
 
         case 'intelligence':
+          costScore()
           if(plusOrMinus === 'plus') {
             setIntScore(intScore + 1);
             setTotalInt(totalInt + racialInt + 1)
@@ -82,6 +121,7 @@ function updateScores(plusOrMinus, attributeType) {
           break;
 
           case 'wisdom':
+            costScore()
             if(plusOrMinus === 'plus') {
               setWisScore(wisScore + 1);
               setTotalWis(totalWis + racialWis + 1)
@@ -92,6 +132,7 @@ function updateScores(plusOrMinus, attributeType) {
             break;
 
             case 'charisma':
+              costScore()
               if(plusOrMinus === 'plus') {
                 setChaScore(chaScore + 1);
                 setTotalCha(totalCha + racialCha + 1)
@@ -102,6 +143,7 @@ function updateScores(plusOrMinus, attributeType) {
               break;
 
               case 'custom':
+                costScore()
                 if(plusOrMinus === 'plus') {
                   setCusScore(cusScore + 1);
                   setTotalCus(totalCus + racialCus + 1)
@@ -116,12 +158,26 @@ function updateScores(plusOrMinus, attributeType) {
 }
 
   useEffect(() => {
+    setTotalStr(racialStr + strScore)
+  }, [racialStr, strScore]);
+
+  useEffect(() => {
+    setTotalDex(racialDex + dexScore)
+  }, [racialDex, dexScore]);
+
+  useEffect(() => {
+    setTotalCon(racialCon + conScore)
+  }, [racialCon]);
+
+  useEffect(() => {
+    setTotalInt(racialInt + intScore)
+  }, [racialInt])
+
+  useEffect(() => {
     if (raceSelected === 'Human') {
       setRacialStr(1);
-      setTotalStr(racialStr + strScore);
 
       setRacialDex(1);
-      setTotalDex(racialDex + dexScore);
 
       setRacialCon(1);
       setTotalCon(racialCon + conScore);
@@ -175,7 +231,7 @@ function updateScores(plusOrMinus, attributeType) {
       setTotalWis(racialWis + wisScore);
 
       setRacialCha(0);
-      setTotalDex(racialCha + chaScore);
+      setTotalCha(racialCha + chaScore);
 
       setRacialCus(0);
       setTotalCus(racialCus + cusScore);
@@ -196,7 +252,7 @@ function updateScores(plusOrMinus, attributeType) {
       setTotalWis(racialWis + wisScore);
 
       setRacialCha(1);
-      setTotalDex(racialCha + chaScore);
+      setTotalCha(racialCha + chaScore);
 
       setRacialCus(0);
       setTotalCus(racialCus + cusScore);
