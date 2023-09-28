@@ -33,7 +33,7 @@ function App() {
 
 
 //Tells you how much it goes up from each score
-function costScore(abilityScore) {
+function addScore(abilityScore) {
   switch(abilityScore) {
     case 8:
       return 1;
@@ -68,6 +68,36 @@ function costScore(abilityScore) {
   } 
 }
 
+function subtractScore(abilityScore) {
+  switch(abilityScore) {
+    case 15:
+    return -2;
+
+    case 14:
+      return -2;
+
+    case 13:
+      return -2;
+
+    case 12:
+      return -1;
+
+    case 11:
+      return -1;
+
+    case 10:
+      return -1;
+
+    case 9:
+      return -1;
+
+    case 8:
+      return -1;
+
+      default: return 0;
+  }
+}
+
 //this function is used for the math to update the scores of each ability 
 function updateScores(plusOrMinus, attributeType) {
   // if (plusOrMinus === 'plus') {
@@ -79,77 +109,113 @@ function updateScores(plusOrMinus, attributeType) {
   switch(attributeType) {
     case 'strength':
       if (plusOrMinus === 'plus') {
-      costScore(strScore)
-      setAbilityScore(abilityScore - costScore(strScore)); 
+        if (strScore >= 15) {
+          return;
+        } 
+      setAbilityScore(abilityScore - addScore(strScore)); 
         setStrScore(strScore + 1);
       } else {
+        if(strScore <= 8) {
+          return;
+        }
+        setAbilityScore(abilityScore - subtractScore(strScore));
         setStrScore(strScore - 1);
       }
       break;
 
     case 'dexterity':
-      costScore()
-      if(plusOrMinus === 'plus') {
+      if (plusOrMinus === 'plus') {
+        if (dexScore >= 15) {
+          return;
+        } 
+      setAbilityScore(abilityScore - addScore(dexScore)); 
         setDexScore(dexScore + 1);
-        setTotalDex(totalDex + racialDex + 1)
       } else {
+        if(dexScore <= 8) {
+          return;
+        }
+        setAbilityScore(abilityScore - subtractScore(dexScore));
         setDexScore(dexScore - 1);
-        setTotalDex(totalDex - 1)
       }
       break;
 
       case 'constitution':
-        costScore()
-        if(plusOrMinus === 'plus') {
+        if (plusOrMinus === 'plus') {
+          if (conScore >= 15) {
+            return;
+          } 
+        setAbilityScore(abilityScore - addScore(conScore)); 
           setConScore(conScore + 1);
-          setTotalCon(totalCon + racialCon + 1)
         } else {
+          if(conScore <= 8) {
+            return;
+          }
+          setAbilityScore(abilityScore - subtractScore(conScore));
           setConScore(conScore - 1);
-          setTotalCon(totalCon - 1)
         }
         break;
 
         case 'intelligence':
-          costScore()
-          if(plusOrMinus === 'plus') {
+          if (plusOrMinus === 'plus') {
+            if (intScore >= 15) {
+              return;
+            } 
+          setAbilityScore(abilityScore - addScore(intScore)); 
             setIntScore(intScore + 1);
-            setTotalInt(totalInt + racialInt + 1)
           } else {
+            if(intScore <= 8) {
+              return;
+            }
+            setAbilityScore(abilityScore - subtractScore(intScore));
             setIntScore(intScore - 1);
-            setTotalInt(totalInt - 1)
           }
           break;
 
           case 'wisdom':
-            costScore()
-            if(plusOrMinus === 'plus') {
+            if (plusOrMinus === 'plus') {
+              if (wisScore >= 15) {
+                return;
+              } 
+            setAbilityScore(abilityScore - addScore(wisScore)); 
               setWisScore(wisScore + 1);
-              setTotalWis(totalWis + racialWis + 1)
             } else {
+              if(wisScore <= 8) {
+                return;
+              }
+              setAbilityScore(abilityScore - subtractScore(wisScore));
               setWisScore(wisScore - 1);
-              setTotalWis(totalWis - 1)
             }
             break;
 
             case 'charisma':
-              costScore()
-              if(plusOrMinus === 'plus') {
+              if (plusOrMinus === 'plus') {
+                if (chaScore >= 15) {
+                  return;
+                } 
+              setAbilityScore(abilityScore - addScore(chaScore)); 
                 setChaScore(chaScore + 1);
-                setTotalCha(totalCha + racialCha + 1)
               } else {
+                if(chaScore <= 8) {
+                  return;
+                }
+                setAbilityScore(abilityScore - subtractScore(chaScore));
                 setChaScore(chaScore - 1);
-                setTotalCha(totalCha - 1)
               }
               break;
 
               case 'custom':
-                costScore()
-                if(plusOrMinus === 'plus') {
+                if (plusOrMinus === 'plus') {
+                  if (cusScore >= 15) {
+                    return;
+                  } 
+                setAbilityScore(abilityScore - addScore(cusScore)); 
                   setCusScore(cusScore + 1);
-                  setTotalCus(totalCus + racialCus + 1)
                 } else {
+                  if(cusScore <= 8) {
+                    return;
+                  }
+                  setAbilityScore(abilityScore - subtractScore(cusScore));
                   setCusScore(cusScore - 1);
-                  setTotalCus(totalCus - 1)
                 }
                 break;
       default:
@@ -174,46 +240,47 @@ function updateScores(plusOrMinus, attributeType) {
   }, [racialInt])
 
   useEffect(() => {
+    setTotalWis(racialWis + wisScore)
+  }, [racialWis])
+
+  useEffect(() => {
+    setTotalCha(racialCha + chaScore)
+  }, [racialCha])
+
+  useEffect(() => {
+    setTotalCus(racialCus + cusScore)
+  }, [racialCus])
+
+  useEffect(() => {
     if (raceSelected === 'Human') {
       setRacialStr(1);
 
       setRacialDex(1);
 
       setRacialCon(1);
-      setTotalCon(racialCon + conScore);
 
       setRacialInt(1);
-      setTotalInt(racialInt + intScore);
 
       setRacialWis(1);
-      setTotalWis(racialWis + wisScore);
 
       setRacialCha(1);
-      setTotalDex(racialCha + chaScore);
 
       setRacialCus(1);
-      setTotalCus(racialCus + cusScore);
+
     } else if (raceSelected === 'Elf') {
       setRacialStr(0);
-      setTotalStr(racialStr + strScore);
 
       setRacialDex(2);
-      setTotalDex(racialDex + dexScore);
-
+ 
       setRacialCon(0);
-      setTotalCon(racialCon + conScore);
 
       setRacialInt(0);
-      setTotalInt(racialInt + intScore);
 
       setRacialWis(0);
-      setTotalWis(racialWis + wisScore);
 
       setRacialCha(0);
-      setTotalDex(racialCha + chaScore);
 
       setRacialCus(0);
-      setTotalCus(racialCus + cusScore);
     } else if (raceSelected === 'Dwarf') {
       setRacialStr(0);
       setTotalStr(racialStr + strScore);
