@@ -2,6 +2,8 @@ import { useEffect, useState } from 'react';
 import './App.css'; 
 import pointbuy from './picture/pointbuy.png';
 
+
+
 function App() {
   const [ abilityScore, setAbilityScore] = useState(27);
   const [raceSelected, setRaceSelected] = useState('');
@@ -32,7 +34,7 @@ function App() {
   const [totalCus, setTotalCus] = useState(8);
 
 
-//Tells you how much it goes up from each score
+//This function is used for adding to the point buy cost
 function addScore(abilityScore) {
   switch(abilityScore) {
     case 8:
@@ -68,6 +70,7 @@ function addScore(abilityScore) {
   } 
 }
 
+//This function is used to subtract from the point buy number
 function subtractScore(abilityScore) {
   switch(abilityScore) {
     case 15:
@@ -99,12 +102,9 @@ function subtractScore(abilityScore) {
 }
 
 //this function is used for the math to update the scores of each ability 
+//a stretch goal for this would be to change the majority of this code into an object with keys as the formula is the same for each ability.
 function updateScores(plusOrMinus, attributeType) {
-  // if (plusOrMinus === 'plus') {
-  //   setAbilityScore(abilityScore - 1);
-  // } else {
-  //   setAbilityScore(abilityScore + 1);
-  // }
+
 
   switch(attributeType) {
     case 'strength':
@@ -223,6 +223,8 @@ function updateScores(plusOrMinus, attributeType) {
   }
 }
 
+
+// These useEffects are used to get the total score for each of the abilities.
   useEffect(() => {
     setTotalStr(racialStr + strScore)
   }, [racialStr, strScore]);
@@ -250,6 +252,11 @@ function updateScores(plusOrMinus, attributeType) {
   useEffect(() => {
     setTotalCus(racialCus + cusScore)
   }, [racialCus])
+
+
+//These useEffects are for each of the races.
+
+//Another stretch goal would be to add the subraces to where when you click on one of the races that has a subrace i.e. dwarf or elf it has another drop down menu appear to where you can select the subrace
 
   useEffect(() => {
     if (raceSelected === 'Human') {
@@ -283,157 +290,118 @@ function updateScores(plusOrMinus, attributeType) {
       setRacialCus(0);
     } else if (raceSelected === 'Dwarf') {
       setRacialStr(0);
-      setTotalStr(racialStr + strScore);
 
       setRacialDex(0);
-      setTotalDex(racialDex + dexScore);
 
       setRacialCon(2);
-      setTotalCon(racialCon + conScore);
 
       setRacialInt(0);
-      setTotalInt(racialInt + intScore);
 
       setRacialWis(0);
-      setTotalWis(racialWis + wisScore);
 
       setRacialCha(0);
-      setTotalCha(racialCha + chaScore);
 
       setRacialCus(0);
-      setTotalCus(racialCus + cusScore);
+
     } else if (raceSelected === 'Dragonborn') {
       setRacialStr(2);
-      setTotalStr(racialStr + strScore);
 
       setRacialDex(0);
-      setTotalDex(racialDex + dexScore);
 
       setRacialCon(0);
-      setTotalCon(racialCon + conScore);
 
       setRacialInt(0);
-      setTotalInt(racialInt + intScore);
 
       setRacialWis(0);
-      setTotalWis(racialWis + wisScore);
 
       setRacialCha(1);
-      setTotalCha(racialCha + chaScore);
 
       setRacialCus(0);
-      setTotalCus(racialCus + cusScore);
+
     } else if (raceSelected === 'Gnome') {
       setRacialStr(0);
-      setTotalStr(racialStr + strScore);
 
       setRacialDex(0);
-      setTotalDex(racialDex + dexScore);
 
       setRacialCon(0);
-      setTotalCon(racialCon + conScore);
 
       setRacialInt(2);
-      setTotalInt(racialInt + intScore);
+
 
       setRacialWis(0);
-      setTotalWis(racialWis + wisScore);
+
 
       setRacialCha(0);
-      setTotalDex(racialCha + chaScore);
+
 
       setRacialCus(0);
-      setTotalCus(racialCus + cusScore);
+
     } else if (raceSelected === 'Half-Elf') {
+      //need to find a way to where the person can choose the +1 bonus that half-elves get rather than have it already chosen.
       setRacialStr(0);
-      setTotalStr(racialStr + strScore);
 
       setRacialDex(1);
-      setTotalDex(racialDex + dexScore);
 
       setRacialCon(0);
-      setTotalCon(racialCon + conScore);
 
       setRacialInt(1);
-      setTotalInt(racialInt + intScore);
 
       setRacialWis(0);
-      setTotalWis(racialWis + wisScore);
 
       setRacialCha(2);
-      setTotalDex(racialCha + chaScore);
 
       setRacialCus(0);
-      setTotalCus(racialCus + cusScore);
+
     } else if (raceSelected === 'Halfling') {
       setRacialStr(0);
-      setTotalStr(racialStr + strScore);
 
       setRacialDex(2);
-      setTotalDex(racialDex + dexScore);
 
       setRacialCon(0);
-      setTotalCon(racialCon + conScore);
 
       setRacialInt(0);
-      setTotalInt(racialInt + intScore);
 
       setRacialWis(0);
-      setTotalWis(racialWis + wisScore);
 
       setRacialCha(0);
-      setTotalDex(racialCha + chaScore);
 
       setRacialCus(0);
-      setTotalCus(racialCus + cusScore);
     } else if (raceSelected === 'Half-Orc') {
       setRacialStr(2);
-      setTotalStr(racialStr + strScore);
 
       setRacialDex(0);
-      setTotalDex(racialDex + dexScore);
 
       setRacialCon(1);
-      setTotalCon(racialCon + conScore);
 
       setRacialInt(0);
-      setTotalInt(racialInt + intScore);
 
       setRacialWis(0);
-      setTotalWis(racialWis + wisScore);
 
       setRacialCha(0);
-      setTotalDex(racialCha + chaScore);
 
       setRacialCus(0);
-      setTotalCus(racialCus + cusScore);
     } else if (raceSelected === 'Tiefling') {
       setRacialStr(0);
-      setTotalStr(racialStr + strScore);
 
       setRacialDex(0);
-      setTotalDex(racialDex + dexScore);
 
       setRacialCon(0);
-      setTotalCon(racialCon + conScore);
 
       setRacialInt(1);
-      setTotalInt(racialInt + intScore);
 
       setRacialWis(0);
-      setTotalWis(racialWis + wisScore);
 
       setRacialCha(2);
-      setTotalDex(racialCha + chaScore);
 
       setRacialCus(0);
-      setTotalCus(racialCus + cusScore);
     };
   }, [raceSelected])
 
 
 
 //Formula to get the ability modifier for each stat
+
+//Another stretch goal would be to make an object with key's since the formula is the same for all of them
 
 function strMod() {
   let modifier = Math.floor((totalStr - 10) / 2)
@@ -529,14 +497,14 @@ function cusMod() {
       <img src={pointbuy} alt='cost'/>
     </div>
     <hr></hr>
-    <div>
+    <div className='tableOne'>
       <button onClick={() => updateScores('plus', 'strength')}>+</button>
       <button onClick={() => updateScores('minus', 'strength')}>-</button>
       <h4>Strength {strScore} + Racial: {racialStr} = Total: {totalStr}</h4>
       <h3>Modifier: {strMod()} </h3>
     </div>
     <hr></hr>
-    <div>
+    <div className='tableTwo'>
     <button onClick={() => updateScores('plus', 'dexterity')}>+</button>
       <button onClick={() => updateScores('minus', 'dexterity')}>-</button>
       <h4>Dexterity {dexScore} + Racial: {racialDex} = Total: {totalDex}</h4>
