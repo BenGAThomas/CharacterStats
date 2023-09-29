@@ -70,6 +70,8 @@ function addScore(abilityScore) {
   } 
 }
 
+
+
 //This function is used to subtract from the point buy number
 function subtractScore(abilityScore) {
   switch(abilityScore) {
@@ -235,23 +237,23 @@ function updateScores(plusOrMinus, attributeType) {
 
   useEffect(() => {
     setTotalCon(racialCon + conScore)
-  }, [racialCon]);
+  }, [racialCon, conScore]);
 
   useEffect(() => {
     setTotalInt(racialInt + intScore)
-  }, [racialInt])
+  }, [racialInt, intScore])
 
   useEffect(() => {
     setTotalWis(racialWis + wisScore)
-  }, [racialWis])
+  }, [racialWis, wisScore])
 
   useEffect(() => {
     setTotalCha(racialCha + chaScore)
-  }, [racialCha])
+  }, [racialCha, chaScore])
 
   useEffect(() => {
     setTotalCus(racialCus + cusScore)
-  }, [racialCus])
+  }, [racialCus, cusScore])
 
 
 //These useEffects are for each of the races.
@@ -259,7 +261,22 @@ function updateScores(plusOrMinus, attributeType) {
 //Another stretch goal would be to add the subraces to where when you click on one of the races that has a subrace i.e. dwarf or elf it has another drop down menu appear to where you can select the subrace
 
   useEffect(() => {
-    if (raceSelected === 'Human') {
+
+    if (raceSelected === 'Select') {
+      setRacialStr(0);
+
+      setRacialDex(0);
+ 
+      setRacialCon(0);
+
+      setRacialInt(0);
+
+      setRacialWis(0);
+
+      setRacialCha(0);
+
+      setRacialCus(0);
+    } else if (raceSelected === 'Human') {
       setRacialStr(1);
 
       setRacialDex(1);
@@ -337,7 +354,6 @@ function updateScores(plusOrMinus, attributeType) {
       setRacialCus(0);
 
     } else if (raceSelected === 'Half-Elf') {
-      //need to find a way to where the person can choose the +1 bonus that half-elves get rather than have it already chosen.
       setRacialStr(0);
 
       setRacialDex(1);
@@ -466,16 +482,21 @@ function cusMod() {
   }
 }
 
+
+//This function is used to reload the page without having to hit refresh
+function reset() {
+  window.location.reload(false);
+}
+
   return (
-    <div >
-      <div>
-        <label>
-          <h1>Choose your Race</h1>
+    <div>
+        <h1>Choose your Race</h1>
+        <label className='raceSelection'>
           <select 
             value={raceSelected}
             onChange={e => setRaceSelected(e.target.value)}
           >
-            <option>Select</option>
+            <option value="Select">Select</option>
             <option value="Elf">Elf</option>
             <option value="Human">Human</option>
             <option value="Gnome">Gnome</option>
@@ -487,24 +508,25 @@ function cusMod() {
             <option value="Halfling">Halfling</option>
           </select>
         </label>
-      </div>
 
     <div>
-      <h2>Choose your Stats</h2>
+      <p>You start out with 27 ability points to spend. Your base stats start at 8 and can increase from there. The table below lets you know how many points you spend per increment or decrement. Currently it is set to RAW rules where you can't get above a 15 unless it is through racial traits.</p>
 
-      <p>You start out with 27 ability points to spend. Your base stats start at 8 and can increase or decrease from there. The table below lets you know how many points you spend per increment or decrement. Currently it is set to RAW rules where you can't get above a 15 unless it is through racial traits.</p>
-      <h1>{abilityScore}</h1>
+      <h1>Choose your Stats</h1>
+
+      <h2>{abilityScore}</h2>
       <img src={pointbuy} alt='cost'/>
+      <button className='resetButton' type='button' onClick={reset}>Reset your points</button>
     </div>
     <hr></hr>
-    <div className='tableOne'>
+    {/* <div>
       <button onClick={() => updateScores('plus', 'strength')}>+</button>
       <button onClick={() => updateScores('minus', 'strength')}>-</button>
       <h4>Strength {strScore} + Racial: {racialStr} = Total: {totalStr}</h4>
       <h3>Modifier: {strMod()} </h3>
     </div>
     <hr></hr>
-    <div className='tableTwo'>
+    <div>
     <button onClick={() => updateScores('plus', 'dexterity')}>+</button>
       <button onClick={() => updateScores('minus', 'dexterity')}>-</button>
       <h4>Dexterity {dexScore} + Racial: {racialDex} = Total: {totalDex}</h4>
@@ -544,6 +566,101 @@ function cusMod() {
       <button onClick={() => updateScores('minus', 'custom')}>-</button>
       <h4>Custom {cusScore} + Racial: {racialCus} = Total {totalCus}</h4>
       <h3>Modifier: {cusMod()}</h3>
+    </div> */}
+
+
+
+    <div>
+      <table>
+        <thead>
+          <tr>
+            <th>Attribute</th>
+            <th>Ability Score</th>
+            <th>Racial Bonus</th>
+            <th>Total</th>
+            <th>Modifier</th>
+          </tr>
+        </thead>
+        <tbody>
+        <tr>
+          <td>Strength</td>
+          <td>{strScore}
+            <button onClick={() => updateScores('plus', 'strength')}>+</button>
+            <button onClick={() => updateScores('minus', 'strength')}>-</button>
+          </td>
+          <td>{racialStr}</td>
+          <td>{totalStr}</td>
+          <td>{strMod()}</td>
+        </tr>
+
+        <tr className='offColor'>
+          <td>Dexterity</td>
+          <td>{dexScore}    
+            <button onClick={() => updateScores('plus', 'dexterity')}>+</button>
+            <button onClick={() => updateScores('minus', 'dexterity')}>-</button>
+          </td>
+          <td>{racialDex}</td>
+          <td>{totalDex}</td>
+          <td>{dexMod()}</td>
+        </tr>
+
+        <tr>
+          <td>Constitution</td>
+          <td>{conScore}
+            <button onClick={() => updateScores('plus', 'constitution')}>+</button>
+            <button onClick={() => updateScores('minus', 'constitution')}>-</button>
+          </td>
+          <td>{racialCon}</td>
+          <td>{totalCon}</td>
+          <td>{conMod()}</td>
+        </tr>
+
+        <tr className='offColor'>
+          <td>Intelligence</td>
+          <td>{intScore}
+            <button onClick={() => updateScores('plus', 'intelligence')}>+</button>
+            <button onClick={() => updateScores('minus', 'intelligence')}>-</button>
+          </td>
+          <td>{racialInt}</td>
+          <td>{totalInt}</td>
+          <td>{intMod()}</td>
+        </tr>
+
+        <tr>
+          <td>Wisdom</td>
+          <td>{wisScore}
+            <button onClick={() => updateScores('plus', 'wisdom')}>+</button>
+            <button onClick={() => updateScores('minus', 'wisdom')}>-</button>
+          </td>
+          <td>{racialWis}</td>
+          <td>{totalWis}</td>
+          <td>{wisMod()}</td>
+        </tr>
+
+        <tr className='offColor'>
+          <td>Charisma</td>
+          <td>{chaScore}
+            <button onClick={() => updateScores('plus', 'charisma')}>+</button>
+            <button onClick={() => updateScores('minus', 'charisma')}>-</button>
+          </td>
+          <td>{racialCha}</td>
+          <td>{totalCha}</td>
+          <td>{chaMod()}</td>
+        </tr>
+
+
+        <tr>
+          <td>Custom</td>
+          <td>{cusScore}    
+            <button onClick={() => updateScores('plus', 'custom')}>+</button>
+            <button onClick={() => updateScores('minus', 'custom')}>-</button>
+          </td>
+          <td>{racialCus}</td>
+          <td>{totalCus}</td>
+          <td>{cusMod()}</td>
+        </tr>
+        </tbody>
+      </table>
     </div>
 
     </div>
